@@ -2,16 +2,18 @@
 
 <!--- Replace <OWNER> with your Github Username and <REPOSITORY> with the name of your repository. -->
 <!--- You can find both of these in the url bar when you open your repository in github. -->
-![Workflow result](https://github.com/<OWNER>/<REPOSITORY>/workflows/Check/badge.svg)
+![Workflow result](https://github.com/tobibo/KidWeather/workflows/Check/badge.svg)
 
 
 ## :scroll: Description
 <!--- Describe your app in one or two sentences -->
+A weather app for small children to show them what to wear. Since being a dad this is one of the tough challenges every day.
 
 
 ## :bulb: Motivation and Context
 <!--- Optionally point readers to interesting parts of your submission. -->
 <!--- What are you especially proud of? -->
+Learning about testing with compose and integrating view modeles with network code. I also wanted to see how some loading animation can be done.
 
 
 ## :camera_flash: Screenshots
