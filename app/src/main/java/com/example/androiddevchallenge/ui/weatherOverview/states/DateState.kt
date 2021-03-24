@@ -26,7 +26,7 @@ data class DateState(
             val d =
                 SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(dateString)
             return DateState(
-                SimpleDateFormat("EEEE").format(d),
+                SimpleDateFormat("EEE").format(d),
                 SimpleDateFormat("d MMM yyyy").format(d)
             )
         }
