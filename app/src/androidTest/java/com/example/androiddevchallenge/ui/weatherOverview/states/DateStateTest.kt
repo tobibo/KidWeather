@@ -13,21 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge.ui.theme
+package com.example.androiddevchallenge.ui.weatherOverview.states
 
-import androidx.compose.ui.graphics.Color
+import org.junit.Assert
+import org.junit.Test
 
-val primary = Color(0xFFff5f6d)
-val primaryLightColor = Color(0xFFff929a)
-val primaryDarkColor = Color(0xFFc62741)
-val primaryVariant = Color(0xFFFA7A85)
-val secondary = Color(0xFFffc371)
-val secondaryLight = Color(0xFFfff7a1)
-val secondaryDark = Color(0xFFc99443)
-val primaryTextColor = Color(0xFF000000)
-val secondaryTextColor = Color(0xFF000000)
+class DateStateTest {
 
-val gradient = listOf(
-    primary,
-    secondary
-)
+    @Test
+    fun parseDateTest() {
+        val subject = DateState.from("2021-03-22T13:40:00+11:00")
+        Assert.assertEquals("22 Mar 2021", subject.date)
+        Assert.assertEquals("Monday", subject.day)
+    }
+}

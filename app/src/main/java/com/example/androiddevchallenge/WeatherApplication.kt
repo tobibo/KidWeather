@@ -15,11 +15,20 @@
  */
 package com.example.androiddevchallenge
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
-class ExampleUnitTest {
-    // Add unit tests here
+import android.app.Application
+import androidx.annotation.VisibleForTesting
+import com.example.androiddevchallenge.di.Graph
+import com.example.androiddevchallenge.di.GraphImpl
+
+@VisibleForTesting
+open class WeatherApplication : Application() {
+
+    val graph: Graph = GraphImpl
+
+    override fun onCreate() {
+        super.onCreate()
+        graph.provide(this)
+    }
 }
+
+fun Application.graph() = (this as WeatherApplication).graph

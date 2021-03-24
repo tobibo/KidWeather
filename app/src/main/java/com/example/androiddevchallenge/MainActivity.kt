@@ -18,29 +18,30 @@ package com.example.androiddevchallenge
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.androiddevchallenge.data.Past6HourRange
+import com.example.androiddevchallenge.data.Result
+import com.example.androiddevchallenge.data.TemperatureSummary
+import com.example.androiddevchallenge.data.WeatherApi
+import com.example.androiddevchallenge.data.WeatherData
+import com.example.androiddevchallenge.ui.WeatherApp
+import com.example.androiddevchallenge.ui.components.AnimationDelays
 import com.example.androiddevchallenge.ui.theme.MyTheme
+import com.example.androiddevchallenge.ui.weatherOverview.WeatherOverviewViewModel
 
 class MainActivity : AppCompatActivity() {
+    private val weatherOverviewViewModel: WeatherOverviewViewModel by lazy {
+        application.graph().weatherOverViewViewModel
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             MyTheme {
-                MyApp()
+                WeatherApp(weatherOverviewViewModel)
             }
         }
-    }
-}
-
-// Start building your app here!
-@Composable
-fun MyApp() {
-    Surface(color = MaterialTheme.colors.background) {
-        Text(text = "Ready... Set... GO!")
     }
 }
 
@@ -48,7 +49,7 @@ fun MyApp() {
 @Composable
 fun LightPreview() {
     MyTheme {
-        MyApp()
+        WeatherApp(WeatherOverviewViewModel(mockWeatherApi, AnimationDelays()))
     }
 }
 
@@ -56,6 +57,12 @@ fun LightPreview() {
 @Composable
 fun DarkPreview() {
     MyTheme(darkTheme = true) {
-        MyApp()
+        WeatherApp(WeatherOverviewViewModel(mockWeatherApi, AnimationDelays()))
+    }
+}
+
+val mockWeatherApi = object : WeatherApi {
+    override suspend fun getCurrentConditions(locationId: String): Result<WeatherData> {
+        return Result.Success(WeatherData(TemperatureSummary = TemperatureSummary(Past6HourRange = Past6HourRange())))
     }
 }

@@ -13,21 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge.ui.theme
+package com.example.androiddevchallenge
 
-import androidx.compose.ui.graphics.Color
+import android.app.Application
+import android.content.Context
+import androidx.test.runner.AndroidJUnitRunner
 
-val primary = Color(0xFFff5f6d)
-val primaryLightColor = Color(0xFFff929a)
-val primaryDarkColor = Color(0xFFc62741)
-val primaryVariant = Color(0xFFFA7A85)
-val secondary = Color(0xFFffc371)
-val secondaryLight = Color(0xFFfff7a1)
-val secondaryDark = Color(0xFFc99443)
-val primaryTextColor = Color(0xFF000000)
-val secondaryTextColor = Color(0xFF000000)
+class MockTestRunner : AndroidJUnitRunner() {
+    override fun newApplication(cl: ClassLoader?, name: String?, context: Context?): Application {
+        return super.newApplication(cl, MockTestApplication::class.java.name, context)
+    }
+}
 
-val gradient = listOf(
-    primary,
-    secondary
-)
+class MockTestApplication : WeatherApplication()

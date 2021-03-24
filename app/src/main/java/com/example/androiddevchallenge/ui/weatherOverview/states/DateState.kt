@@ -13,21 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge.ui.theme
+package com.example.androiddevchallenge.ui.weatherOverview.states
 
-import androidx.compose.ui.graphics.Color
+import java.text.SimpleDateFormat
 
-val primary = Color(0xFFff5f6d)
-val primaryLightColor = Color(0xFFff929a)
-val primaryDarkColor = Color(0xFFc62741)
-val primaryVariant = Color(0xFFFA7A85)
-val secondary = Color(0xFFffc371)
-val secondaryLight = Color(0xFFfff7a1)
-val secondaryDark = Color(0xFFc99443)
-val primaryTextColor = Color(0xFF000000)
-val secondaryTextColor = Color(0xFF000000)
-
-val gradient = listOf(
-    primary,
-    secondary
-)
+data class DateState(
+    val day: String,
+    val date: String
+) {
+    companion object {
+        fun from(dateString: String): DateState {
+            val d =
+                SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(dateString)
+            return DateState(
+                SimpleDateFormat("EEEE").format(d),
+                SimpleDateFormat("d MMM yyyy").format(d)
+            )
+        }
+    }
+}

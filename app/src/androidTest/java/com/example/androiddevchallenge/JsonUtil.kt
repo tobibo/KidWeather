@@ -15,24 +15,21 @@
  */
 package com.example.androiddevchallenge
 
-import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
+import android.content.Context
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
-@RunWith(AndroidJUnit4::class)
-class ExampleInstrumentedTest {
-    @get:Rule
-    val composeTestRule = createAndroidComposeRule<MainActivity>()
+object JsonUtil {
 
-    @Test
-    fun sampleTest() {
-        // Add instrumented tests here
+    inline fun <reified T> getJson(context: Context, file: String): T {
+        val moshi = Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
+
+        val adapter: JsonAdapter<T> = moshi.adapter(T::class.java)
+
+        val jsonString = this.javaClass.classLoader.getResourceAsStream(file).bufferedReader().use { it.readText() }
+        return adapter.fromJson(jsonString) as T
     }
 }
