@@ -24,6 +24,6 @@ class DateStateTest {
     fun parseDateTest() {
         val subject = DateState.from("2021-03-22T13:40:00+11:00")
         Assert.assertEquals("22 Mar 2021", subject.date)
-        Assert.assertEquals("Monday", subject.day)
+        Assert.assertEquals("Mont", subject.day)
     }
 }
